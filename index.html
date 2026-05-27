@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PF Dev — Desenvolvimento Web | Rio de Janeiro</title>
+  <meta name="description" content="Sites profissionais para pequenos negócios no Rio de Janeiro. Prévia gratuita em 24h. Seu negócio no Google em 7 dias."/>
+  <meta name="keywords" content="site para pequenos negócios, desenvolvimento web niterói, criação de sites rio de janeiro, site barato rj, site profissional niterói"/>
+  <meta name="author" content="PF Dev"/>
+  <meta name="robots" content="index, follow"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://pfdev.com.br"/>
+  <meta property="og:title" content="PF Dev — Seu negócio no Google em 7 dias"/>
+  <meta property="og:description" content="Sites profissionais para pequenos negócios no Rio de Janeiro. Prévia gratuita em 24h. Seu negócio no Google em 7 dias."/>
+  <meta property="og:image" content="https://pfdev.com.br/og-image.jpg"/>
+  <meta property="og:locale" content="pt_BR"/>
+  <meta property="og:site_name" content="PF Dev"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="PF Dev — Seu negócio no Google em 7 dias"/>
+  <meta name="twitter:description" content="Sites profissionais para pequenos negócios no Rio de Janeiro. Prévia gratuita em 24h. Seu negócio no Google em 7 dias."/>
+  <meta name="twitter:image" content="https://pfdev.com.br/og-image.jpg"/>
+  <link rel="canonical" href="https://pfdev.com.br"/>
+  <meta name="theme-color" content="#070711"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #07080f;
+      --surface: #0d0e1a;
+      --surface2: #12142a;
+      --border: rgba(255,255,255,0.07);
+      --text: #e8eaf6;
+      --muted: #7b80a0;
+      --subtle: #3d4060;
+      --blue: #2563eb;
+      --cyan: #38bdf8;
+      --violet: #7c3aed;
+      --magenta: #c026d3;
+      --grad: linear-gradient(135deg, #38bdf8 0%, #2563eb 48%, #c026d3 100%);
+      --grad-text: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #e879f9 100%);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── GLOW ORBS ── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb-1 { width: 600px; height: 600px; background: rgba(37,99,235,0.15); top: -200px; left: -200px; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(192,38,211,0.12); bottom: -150px; right: -150px; }
+    .orb-3 { width: 300px; height: 300px; background: rgba(56,189,248,0.08); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+    section, nav, footer { position: relative; z-index: 1; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 clamp(20px, 5vw, 80px);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(7,8,15,0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo svg { display: block; }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--grad);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 9px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px clamp(20px, 6vw, 120px) 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(37,99,235,0.1);
+      border: 1px solid rgba(37,99,235,0.25);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #93c5fd;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.2s;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+
+    .hero-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 10vw, 110px);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+      color: #fff;
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.35s;
+    }
+
+    .hero-headline .grad-word {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(14px, 2vw, 18px);
+      color: var(--muted);
+      max-width: 540px;
+      margin: 20px auto 0;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.5s;
+    }
+
+    .hero-sub em { color: var(--text); font-style: normal; font-weight: 500; }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 40px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.65s;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--grad);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 40px rgba(37,99,235,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 48px rgba(37,99,235,0.45); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+    .hero-stats {
+      display: flex;
+      gap: clamp(24px, 5vw, 60px);
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.8s;
+    }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 0.05em; }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── SECTION BASE ── */
+    .section { padding: clamp(60px, 10vw, 120px) clamp(20px, 6vw, 80px); }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1;
+      color: #fff;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+    }
+    .section-desc { font-size: 15px; color: var(--muted); max-width: 520px; font-weight: 300; line-height: 1.7; }
+
+    /* ── HOW IT WORKS ── */
+    .how { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      margin-top: 48px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .how-step {
+      background: var(--surface);
+      padding: 32px 28px;
+      transition: background 0.2s;
+    }
+    .how-step:hover { background: var(--surface2); }
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .step-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── PLANS ── */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .plan-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .plan-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.14); }
+    .plan-card.featured {
+      border-color: rgba(99,102,241,0.4);
+      background: linear-gradient(160deg, rgba(37,99,235,0.08), rgba(124,58,237,0.06));
+    }
+    .plan-card.featured::after {
+      content: 'MAIS VENDIDO';
+      position: absolute;
+      top: 14px; right: -26px;
+      background: var(--grad);
+      color: white;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 4px 32px;
+      transform: rotate(35deg);
+    }
+    .plan-tier { font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; }
+    .plan-tier.blue { color: #38bdf8; }
+    .plan-tier.violet { color: #818cf8; }
+    .plan-tier.magenta { color: #e879f9; }
+    .plan-price-wrap { display: flex; align-items: baseline; gap: 4px; }
+    .plan-price-val { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: #fff; line-height: 1; }
+    .plan-price-suffix { font-size: 13px; color: var(--muted); }
+    .plan-divider { height: 1px; background: var(--border); }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .plan-features li { font-size: 13px; color: #c8cde0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.4; }
+    .plan-features li::before { content: '✓'; color: #38bdf8; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+    .plan-deadline { font-size: 12px; color: var(--subtle); margin-top: auto; }
+    .plan-cta {
+      display: block;
+      text-align: center;
+      background: var(--grad);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      margin-top: 4px;
+    }
+    .plan-cta:hover { opacity: 0.85; }
+    .plan-cta.ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .plan-cta.ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+    /* ── SUPPORT ── */
+    .support-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .support-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .support-tag { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .support-price { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: #fff; line-height: 1; margin-bottom: 8px; }
+    .support-price span { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: var(--muted); }
+    .support-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── CTA FINAL ── */
+    .cta-final {
+      text-align: center;
+      padding: clamp(60px, 10vw, 120px) clamp(20px, 6vw, 80px);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .cta-final h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 7vw, 72px);
+      color: #fff;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+    }
+    .cta-final p { font-size: 15px; color: var(--muted); margin-bottom: 36px; font-weight: 300; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px clamp(20px, 6vw, 80px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-note { font-size: 12px; color: var(--subtle); }
+    .footer-contact { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .footer-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--grad); flex-shrink: 0; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .support-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 24px; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <svg width="160" height="44" viewBox="0 0 420 118" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="48%" stop-color="#2563eb"/>
+            <stop offset="100%" stop-color="#c026d3"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(4 12)">
+          <rect x="0" y="0" width="94" height="94" rx="24" fill="#111320" stroke="url(#navGrad)" stroke-width="2"/>
+          <path d="M29 32L18 47L29 62" fill="none" stroke="url(#navGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M66 32L77 47L66 62" fill="none" stroke="url(#navGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M51 27L42 68" fill="none" stroke="#f8fafc" stroke-width="5" stroke-linecap="round"/>
+        </g>
+        <g transform="translate(122 30)">
+          <text x="0" y="40" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="44" font-weight="900" letter-spacing="-2.8" fill="#ffffff">PF</text>
+          <text x="67" y="40" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="44" font-weight="500" letter-spacing="-1.2" fill="url(#navGrad)">Dev</text>
+        </g>
+      </svg>
+    </a>
+    <a href="https://wa.me/5521967582727?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20planos." class="nav-cta" target="_blank">
+      Fale comigo →
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Rio de Janeiro e Região</div>
+    <h1 class="hero-headline">
+      SEU NEGÓCIO<br>
+      NO <span class="grad-word">GOOGLE</span><br>
+      EM 7 DIAS
+    </h1>
+    <p class="hero-sub">
+      Porque seus clientes já estão buscando.<br>
+      <em>Sites profissionais para pequenos negócios — rápidos, responsivos e prontos para atrair clientes 24h por dia.</em>
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5521967582727?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20uma%20prévia%20gratuita%20do%20meu%20site." class="btn-primary" target="_blank">
+        Quero minha prévia grátis →
+      </a>
+      <a href="#planos" class="btn-ghost">Ver planos</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">7</div>
+        <div class="stat-label">Dias para entregar</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Planos disponíveis</div>
+      </div>
+      <div>
+        <div class="stat-num">R$0</div>
+        <div class="stat-label">Prévia sem compromisso</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how">
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="section-label">Como funciona</div>
+      <h2 class="section-title">Do primeiro contato<br>ao site no ar</h2>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="step-num">01</div>
+          <div class="step-title">Você me chama</div>
+          <div class="step-desc">Manda uma mensagem no WhatsApp. Sem formulário, sem burocracia — conversa direta.</div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">02</div>
+          <div class="step-title">Prévia gratuita</div>
+          <div class="step-desc">Monto uma prévia do seu site em 24h para você ver como vai ficar antes de decidir.</div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">03</div>
+          <div class="step-title">Aprovação</div>
+          <div class="step-desc">Gostou? 50% para começar. Ajustamos tudo até ficar exatamente como você quer.</div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">04</div>
+          <div class="step-title">Site no ar</div>
+          <div class="step-desc">Domínio configurado, hospedagem garantida, SSL ativo. Seu negócio no Google em 7 dias.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section class="section" id="planos">
+    <div style="max-width:1000px;margin:0 auto;">
+      <div class="section-label">Planos e preços</div>
+      <h2 class="section-title">Escolha o seu</h2>
+      <p class="section-desc">Todos os planos incluem domínio .com.br por 1 ano, hospedagem e suporte pós-entrega.</p>
+      <div class="plans-grid">
+
+        <div class="plan-card">
+          <div class="plan-tier blue">Essencial</div>
+          <div class="plan-price-wrap">
+            <div class="plan-price-val">650</div>
+            <div class="plan-price-suffix">R$</div>
+          </div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li>Landing page responsiva</li>
+            <li>Sobre, serviços, localização</li>
+            <li>Botão WhatsApp direto</li>
+            <li>Google Maps integrado</li>
+            <li>Domínio .com.br incluso</li>
+          </ul>
+          <div class="plan-deadline">⏱ Entrega em 7 dias</div>
+          <a href="https://wa.me/5521967582727?text=Olá!%20Tenho%20interesse%20no%20plano%20Essencial." class="plan-cta ghost" target="_blank">Quero esse →</a>
+        </div>
+
+        <div class="plan-card featured">
+          <div class="plan-tier violet">Profissional</div>
+          <div class="plan-price-wrap">
+            <div class="plan-price-val">1.100</div>
+            <div class="plan-price-suffix">R$</div>
+          </div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li>Tudo do Essencial</li>
+            <li>Animações no scroll</li>
+            <li>Galeria de fotos</li>
+            <li>Formulário de orçamento</li>
+            <li>Páginas por serviço</li>
+          </ul>
+          <div class="plan-deadline">⏱ Entrega em 14 dias</div>
+          <a href="https://wa.me/5521967582727?text=Olá!%20Tenho%20interesse%20no%20plano%20Profissional." class="plan-cta" target="_blank">Quero esse →</a>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-tier magenta">Premium</div>
+          <div class="plan-price-wrap">
+            <div class="plan-price-val">2.000</div>
+            <div class="plan-price-suffix">R$</div>
+          </div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li>Tudo do Profissional</li>
+            <li>Animação temática exclusiva</li>
+            <li>Design 100% personalizado</li>
+            <li>Sem template</li>
+            <li>Identidade visual inclusa</li>
+          </ul>
+          <div class="plan-deadline">⏱ Entrega em 21 dias</div>
+          <a href="https://wa.me/5521967582727?text=Olá!%20Tenho%20interesse%20no%20plano%20Premium." class="plan-cta ghost" target="_blank">Quero esse →</a>
+        </div>
+
+      </div>
+
+      <!-- Suporte -->
+      <div style="margin-top:48px;">
+        <div class="section-label">Suporte pós-entrega</div>
+        <div class="support-row">
+          <div class="support-card">
+            <div class="support-tag">Plano Tranquilidade</div>
+            <div class="support-price">R$ 60 <span>/mês</span></div>
+            <div class="support-desc">Renovação do domínio inclusa · Até 2 atualizações por mês · Suporte via WhatsApp · Zero preocupação</div>
+          </div>
+          <div class="support-card">
+            <div class="support-tag">Avulso</div>
+            <div class="support-price">R$ 80 <span>/chamado</span></div>
+            <div class="support-desc">Sem mensalidade · Sem compromisso · Paga só quando precisar de alguma alteração · Pix na hora</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <h2>PRONTO PARA<br>APARECER NO GOOGLE?</h2>
+    <p>Manda uma mensagem agora. Monto a prévia do seu site em 24h — sem compromisso.</p>
+    <a href="https://wa.me/5521967582727?text=Olá!%20Vim%20pelo%20site%20e%20quero%20ver%20como%20ficaria%20meu%20site." class="btn-primary" target="_blank" style="font-size:16px;padding:16px 40px;">
+      Falar no WhatsApp →
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <svg width="120" height="34" viewBox="0 0 420 118" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="footGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38bdf8"/>
+          <stop offset="48%" stop-color="#2563eb"/>
+          <stop offset="100%" stop-color="#c026d3"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(4 12)">
+        <rect x="0" y="0" width="94" height="94" rx="24" fill="#111320" stroke="url(#footGrad)" stroke-width="2"/>
+        <path d="M29 32L18 47L29 62" fill="none" stroke="url(#footGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M66 32L77 47L66 62" fill="none" stroke="url(#footGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M51 27L42 68" fill="none" stroke="#f8fafc" stroke-width="5" stroke-linecap="round"/>
+      </g>
+      <g transform="translate(122 30)">
+        <text x="0" y="40" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="44" font-weight="900" letter-spacing="-2.8" fill="#ffffff">PF</text>
+        <text x="67" y="40" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="44" font-weight="500" letter-spacing="-1.2" fill="url(#footGrad)">Dev</text>
+      </g>
+    </svg>
+    <div class="footer-contact">
+      <div class="footer-dot"></div>
+      (21) 96758-2727
+    </div>
+    <div class="footer-note">© 2026 PF Dev · Rio de Janeiro e Região</div>
+  </footer>
+
+</body>
+</html>
