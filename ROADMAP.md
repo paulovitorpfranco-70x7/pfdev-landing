@@ -2,7 +2,7 @@
 
 ## Fase 1 — Refinamentos imediatos
 - [x] 1.1 Meta tags SEO completas (og, twitter, canonical, theme-color)
-- [ ] 1.2 Favicon inline em SVG (usar ícone da logo)
+- [x] 1.2 Favicon inline em SVG (usar ícone da logo)
 - [ ] 1.3 Melhorar responsividade mobile (testar em 375px)
 - [ ] 1.4 Scroll suave com highlight ativo no nav
 - [ ] 1.5 Seção FAQ com 5 perguntas comuns
