@@ -405,6 +405,49 @@
     .support-price span { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: var(--muted); }
     .support-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
+    /* ── FAQ ── */
+    .faq-list {
+      margin-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: transparent;
+      border: 0;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+      padding: 22px 0;
+      text-align: left;
+    }
+    .faq-icon {
+      color: #38bdf8;
+      flex-shrink: 0;
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-answer p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      padding: 0 44px 22px 0;
+    }
+    .faq-item.open .faq-answer { max-height: 260px; }
+
     /* ── CTA FINAL ── */
     .cta-final {
       text-align: center;
@@ -508,6 +551,7 @@
     <div class="nav-menu">
       <a href="#como-funciona" class="nav-link">Como funciona</a>
       <a href="#planos" class="nav-link">Planos</a>
+      <a href="#faq" class="nav-link">FAQ</a>
       <a href="https://wa.me/5521967582727?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20planos." class="nav-cta" target="_blank">
         Fale comigo →
       </a>
@@ -661,6 +705,61 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Perguntas comuns</h2>
+      <div class="faq-list">
+        <div class="faq-item open">
+          <button class="faq-question" type="button" aria-expanded="true">
+            <span>Preciso entender de tecnologia para ter um site?</span>
+            <span class="faq-icon" aria-hidden="true">×</span>
+          </button>
+          <div class="faq-answer">
+            <p>Não. Você me passa as informações do seu negócio e eu cuido de tudo — domínio, hospedagem, configuração e publicação. Você só precisa aprovar o resultado.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>Quanto tempo leva para ficar pronto?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Depende do plano escolhido: Essencial em 7 dias, Profissional em 14 dias e Premium em 21 dias. O prazo começa após a aprovação da prévia e o pagamento da entrada.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>O domínio .com.br fica no meu nome?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>O domínio é registrado e configurado por mim incluído no valor. Se quiser transferir para o seu nome depois é simples — leva 5 minutos e não tem custo extra.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>E se eu precisar atualizar o site depois?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Você tem duas opções: o Plano Tranquilidade por R$ 60/mês com até 2 atualizações mensais, ou o serviço avulso por R$ 80 por chamado sem mensalidade. Escolhe o que faz mais sentido para você.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>Como funciona a prévia gratuita?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Antes de qualquer pagamento, monto uma versão de demonstração do seu site para você ver como vai ficar. Se não gostar, não tem custo nenhum. Se aprovar, aí sim combinamos os detalhes e o pagamento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA FINAL -->
   <section class="cta-final">
     <h2>PRONTO PARA<br>APARECER NO GOOGLE?</h2>
@@ -700,7 +799,8 @@
 
   <script>
     const navLinks = document.querySelectorAll('.nav-link');
-    const observedSections = document.querySelectorAll('#como-funciona, #planos');
+    const observedSections = document.querySelectorAll('#como-funciona, #planos, #faq');
+    const faqItems = document.querySelectorAll('.faq-item');
 
     const setActiveLink = (sectionId) => {
       navLinks.forEach((link) => {
@@ -717,6 +817,17 @@
     }, { threshold: 0.3 });
 
     observedSections.forEach((section) => observer.observe(section));
+
+    faqItems.forEach((item) => {
+      const button = item.querySelector('.faq-question');
+      const icon = item.querySelector('.faq-icon');
+
+      button.addEventListener('click', () => {
+        const isOpen = item.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(isOpen));
+        icon.textContent = isOpen ? '×' : '+';
+      });
+    });
   </script>
 
 </body>
