@@ -45,6 +45,8 @@
 
     html { scroll-behavior: smooth; }
 
+    section[id] { scroll-margin-top: 80px; }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -95,6 +97,24 @@
     }
 
     .nav-logo svg { display: block; }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-link.active { color: #38bdf8; }
 
     .nav-cta {
       display: inline-flex;
@@ -423,6 +443,7 @@
     }
 
     @media (max-width: 600px) {
+      .nav-link { display: none; }
       .hero-stats { gap: 24px; }
       footer { flex-direction: column; align-items: flex-start; }
     }
@@ -484,9 +505,13 @@
         </g>
       </svg>
     </a>
-    <a href="https://wa.me/5521967582727?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20planos." class="nav-cta" target="_blank">
-      Fale comigo →
-    </a>
+    <div class="nav-menu">
+      <a href="#como-funciona" class="nav-link">Como funciona</a>
+      <a href="#planos" class="nav-link">Planos</a>
+      <a href="https://wa.me/5521967582727?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20planos." class="nav-cta" target="_blank">
+        Fale comigo →
+      </a>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -524,7 +549,7 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="section how">
+  <section class="section how" id="como-funciona">
     <div style="max-width:900px;margin:0 auto;">
       <div class="section-label">Como funciona</div>
       <h2 class="section-title">Do primeiro contato<br>ao site no ar</h2>
@@ -672,6 +697,27 @@
     </div>
     <div class="footer-note">© 2026 PF Dev · Rio de Janeiro e Região</div>
   </footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('.nav-link');
+    const observedSections = document.querySelectorAll('#como-funciona, #planos');
+
+    const setActiveLink = (sectionId) => {
+      navLinks.forEach((link) => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${sectionId}`);
+      });
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveLink(entry.target.id);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observedSections.forEach((section) => observer.observe(section));
+  </script>
 
 </body>
 </html>
