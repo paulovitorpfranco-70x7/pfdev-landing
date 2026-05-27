@@ -417,10 +417,41 @@
     .footer-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--grad); flex-shrink: 0; }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .plans-grid { grid-template-columns: 1fr; }
+      .plan-card { padding: 20px 18px; }
+    }
+
     @media (max-width: 600px) {
-      .support-row { grid-template-columns: 1fr; }
       .hero-stats { gap: 24px; }
       footer { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 500px) {
+      .how-grid,
+      .support-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 399px) {
+      .nav-logo svg { width: 130px; height: auto; }
+      .nav-cta { padding: 8px 14px; }
+
+      .hero-headline { font-size: 44px; }
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .hero-actions .btn-primary,
+      .hero-actions .btn-ghost {
+        justify-content: center;
+        width: 100%;
+      }
+      .hero-stats {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .footer-note { font-size: 11px; }
     }
   </style>
 </head>
